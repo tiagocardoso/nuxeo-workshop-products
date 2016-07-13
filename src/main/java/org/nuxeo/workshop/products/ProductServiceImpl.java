@@ -1,5 +1,6 @@
 package org.nuxeo.workshop.products;
 
+import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.runtime.model.ComponentContext;
 import org.nuxeo.runtime.model.ComponentInstance;
 import org.nuxeo.runtime.model.DefaultComponent;
@@ -52,5 +53,13 @@ public class ProductServiceImpl extends DefaultComponent implements ProductServi
     @Override
     public void unregisterContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
         // Logic to do when unregistering any contribution
+    }
+
+    @Override
+    public float computePrice(DocumentModel doc) {
+        if (doc.getType().equals("TAProduct")) {
+            return ((Double) doc.getPropertyValue("TAProduct:price")).floatValue();
+        }
+        return 0;
     }
 }
