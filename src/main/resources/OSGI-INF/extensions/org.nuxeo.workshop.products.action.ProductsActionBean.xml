@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.workshop.products.action.ProductsActionBean">
+
+  <extension target="org.nuxeo.ecm.platform.actions.ActionService"
+    point="actions">
+
+    <action id="org.nuxeo.workshop.products.action.ProductsActionBean" link="#{productsAction.doGet}"
+      order="200" label="label.org.nuxeo.workshop.products.action.ProductsActionBean"
+      icon="/icons/org.nuxeo.workshop.products.action.ProductsActionBean-action.png">
+      <category>SUBVIEW_UPPER_LIST</category>
+      <filter-id>org.nuxeo.workshop.products.action.ProductsActionBean</filter-id>
+    </action>
+  </extension>
+
+  <extension target="org.nuxeo.ecm.platform.actions.ActionService"
+    point="filters">
+
+    <filter id="org.nuxeo.workshop.products.action.ProductsActionBean">
+      <rule grant="true">
+        <condition>#{productsAction.accept()}</condition>
+      </rule>
+    </filter>
+
+  </extension>
+
+</component>
