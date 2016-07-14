@@ -1,9 +1,25 @@
 <?xml version="1.0"?>
 <component name="org.nuxeo.workshop.products.service.product-service" version="1.0">
 
-  <implementation class="org.nuxeo.workshop.products.ProductServiceImpl" />
+  <implementation class="org.nuxeo.workshop.products.ProductServiceImpl"/>
 
   <service>
-    <provide interface="org.nuxeo.workshop.products.ProductService" />
+    <provide interface="org.nuxeo.workshop.products.ProductService"/>
   </service>
+
+  <extension-point name="countryTax">
+    <documentation>
+      This extension point can be used to configure available notifications types. A
+      given notification has the form:
+      <code>
+        <countryTax country="pt"
+                    tax="0.23"/>
+      </code>
+      The <em>country</em> is the country of the tax
+
+      The <em>tax</em> is the percentage of tax
+    </documentation>
+    <object
+        class="org.nuxeo.workshop.products.service.CountryTaxDescriptor"/>
+  </extension-point>
 </component>
