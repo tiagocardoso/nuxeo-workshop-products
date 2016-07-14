@@ -58,7 +58,7 @@ public class ProductServiceImpl extends DefaultComponent implements ProductServi
     @Override
     public float computePrice(DocumentModel doc) {
         if (doc.getType().equals("TAProduct")) {
-            return ((Double) doc.getPropertyValue("TAProduct:price")).floatValue();
+            return ((Double) doc.getPropertyValue("TAProduct:price")).floatValue() + 1.0f;
         }
         return 0;
     }
