@@ -6,4 +6,6 @@ public interface ProductService {
 
     float computePrice(DocumentModel doc);
 
+    float computePriceWithTax(DocumentModel doc, String country);
+
 }

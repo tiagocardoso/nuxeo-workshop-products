@@ -4,8 +4,14 @@ import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.runtime.model.ComponentContext;
 import org.nuxeo.runtime.model.ComponentInstance;
 import org.nuxeo.runtime.model.DefaultComponent;
+import org.nuxeo.workshop.products.service.CountryTaxDescriptor;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ProductServiceImpl extends DefaultComponent implements ProductService {
+    private static final String COUNTRY_TAX_XP_NAME = "countryTax";
+    protected Map<String, Float> taxes = new ConcurrentHashMap<>();
 
     /**
      * Component activated notification.
@@ -47,12 +53,25 @@ public class ProductServiceImpl extends DefaultComponent implements ProductServi
 
     @Override
     public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
-        // Add some logic here to handle contributions
+        if (!COUNTRY_TAX_XP_NAME.equals(extensionPoint)) {
+            return;
+        }
+        CountryTaxDescriptor countryTax = (CountryTaxDescriptor) contribution;
+        if (taxes.containsKey(countryTax.getCountry())) {
+            taxes.remove(countryTax.getCountry());
+        }
+        taxes.put(countryTax.getCountry(), Float.valueOf(countryTax.getTax()));
     }
 
     @Override
     public void unregisterContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
-        // Logic to do when unregistering any contribution
+        if (!COUNTRY_TAX_XP_NAME.equals(extensionPoint)) {
+            return;
+        }
+        CountryTaxDescriptor countryTax = (CountryTaxDescriptor) contribution;
+        if (taxes.containsKey(countryTax.getCountry())) {
+            taxes.remove(countryTax.getCountry());
+        }
     }
 
     @Override
@@ -62,4 +81,18 @@ public class ProductServiceImpl extends DefaultComponent implements ProductServi
         }
         return 0;
     }
+
+    @Override
+    public float computePriceWithTax(DocumentModel doc, String country) {
+        if (doc.getType().equals("TAProduct")) {
+            float tax = 0.0f;
+            if (taxes.containsKey(country)) {
+                tax = taxes.get(country);
+            }
+            return ((Double) doc.getPropertyValue("TAProduct:price")).floatValue() * (1.0f + tax);
+        }
+        return 0;
+    }
+
+
 }
