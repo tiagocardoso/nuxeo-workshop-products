@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.workshop.products.listener.product-removed-listener">
+
+    <extension target="org.nuxeo.ecm.core.event.EventServiceComponent" point="listener">
+        <listener async="false" postCommit="true" name="product-removed-listener"
+                  class="org.nuxeo.workshop.products.listener.ProductRemovedListener">
+            <event>documentRemoved</event>
+        </listener>
+    </extension>
+
+</component>
