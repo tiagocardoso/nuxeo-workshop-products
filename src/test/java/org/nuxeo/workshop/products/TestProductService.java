@@ -36,6 +36,6 @@ public class TestProductService {
         doc.setPropertyValue("dc:title", "test product");
         doc.setPropertyValue("TAProduct:price", 56.09);
         doc = session.createDocument(doc);
-        assertEquals(productService.computePrice(doc), ((Double) doc.getPropertyValue("TAProduct:price")).floatValue(), 0.0f);
+        assertEquals(productService.computePrice(doc), ((Double) doc.getPropertyValue("TAProduct:price")).floatValue() + 1.0f, 0.0f);
     }
 }
