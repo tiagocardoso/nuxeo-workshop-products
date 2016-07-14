@@ -2,9 +2,9 @@
 <component name="org.nuxeo.workshop.products.listener.product-removed-listener">
 
     <extension target="org.nuxeo.ecm.core.event.EventServiceComponent" point="listener">
-        <listener async="false" postCommit="true" name="product-removed-listener"
+        <listener async="true" postCommit="true" name="product-removed-listener"  priority="120"
                   class="org.nuxeo.workshop.products.listener.ProductRemovedListener">
-            <event>documentRemoved</event>
+            <event>productRemoved</event>
         </listener>
     </extension>
 
