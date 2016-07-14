@@ -4,10 +4,8 @@ import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
 import org.nuxeo.ecm.automation.core.annotations.Operation;
 import org.nuxeo.ecm.automation.core.annotations.OperationMethod;
-import org.nuxeo.ecm.core.api.CoreSession;
-import org.nuxeo.ecm.core.api.DocumentModel;
-import org.nuxeo.ecm.core.api.DocumentRef;
-import org.nuxeo.ecm.core.api.DocumentRefList;
+import org.nuxeo.ecm.core.api.*;
+import org.nuxeo.ecm.core.api.impl.DocumentModelListImpl;
 import org.nuxeo.runtime.api.Framework;
 import org.nuxeo.workshop.products.ProductService;
 
@@ -24,15 +22,19 @@ public class UpdatePrice {
     protected CoreSession session;
 
     @OperationMethod
-    public void run(DocumentModel doc) {
+    public DocumentModel run(DocumentModel doc) {
         updateProductPrice(doc);
+        return doc;
     }
 
     @OperationMethod
-    public void run(DocumentRefList docs) {
+    public DocumentModelList run(DocumentRefList docs) {
+        DocumentModelListImpl result = new DocumentModelListImpl(
+                (int) docs.totalSize());
         for (DocumentRef doc : docs) {
-            run(session.getDocument(doc));
+            result.add(run(session.getDocument(doc)));
         }
+        return result;
     }
 
     protected void updateProductPrice(DocumentModel doc) {
