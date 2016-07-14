@@ -7,4 +7,5 @@ Bundle-Name: nuxeo-workshop-products-core
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.nuxeo.workshop.products.nuxeo-workshop-products-core;singleton=true
 Nuxeo-Component: OSGI-INF/product-service-service.xml,
- OSGI-INF/update-price-operation-contrib.xml
+ OSGI-INF/update-price-operation-contrib.xml,
+ OSGI-INF/product-adapter-contrib.xml
