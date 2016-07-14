@@ -13,9 +13,9 @@ import org.nuxeo.ecm.core.api.impl.DocumentModelListImpl;
 import org.nuxeo.ecm.core.test.DefaultRepositoryInit;
 import org.nuxeo.ecm.core.test.annotations.Granularity;
 import org.nuxeo.ecm.core.test.annotations.RepositoryConfig;
-import org.nuxeo.runtime.test.runner.Deploy;
 import org.nuxeo.runtime.test.runner.Features;
 import org.nuxeo.runtime.test.runner.FeaturesRunner;
+import org.nuxeo.workshop.products.test.ProductFeature;
 
 import javax.inject.Inject;
 import java.util.HashMap;
@@ -24,9 +24,8 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(FeaturesRunner.class)
-@Features(AutomationFeature.class)
+@Features({ AutomationFeature.class, ProductFeature.class})
 @RepositoryConfig(init = DefaultRepositoryInit.class, cleanup = Granularity.METHOD)
-@Deploy({"org.nuxeo.workshop.products.nuxeo-workshop-products-core", "studio.extensions.aaraujo-SANDBOX"})
 public class TestUpdatePrice {
 
     @Inject

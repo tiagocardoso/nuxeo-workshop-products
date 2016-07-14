@@ -7,16 +7,15 @@ import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.test.CoreFeature;
 import org.nuxeo.ecm.platform.test.PlatformFeature;
-import org.nuxeo.runtime.test.runner.Deploy;
 import org.nuxeo.runtime.test.runner.Features;
 import org.nuxeo.runtime.test.runner.FeaturesRunner;
+import org.nuxeo.workshop.products.test.ProductFeature;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(FeaturesRunner.class)
-@Features({ CoreFeature.class, PlatformFeature.class })
-@Deploy({ "org.nuxeo.workshop.products.nuxeo-workshop-products-core", "studio.extensions.aaraujo-SANDBOX"})
+@Features({ CoreFeature.class, PlatformFeature.class, ProductFeature.class })
 public class TestProductService {
 
     @Inject
