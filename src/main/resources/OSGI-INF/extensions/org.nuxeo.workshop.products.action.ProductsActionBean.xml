@@ -4,12 +4,15 @@
   <extension target="org.nuxeo.ecm.platform.actions.ActionService"
     point="actions">
 
-    <action id="org.nuxeo.workshop.products.action.ProductsActionBean" link="#{productsAction.doGet}"
-      order="200" label="label.org.nuxeo.workshop.products.action.ProductsActionBean"
-      icon="/icons/org.nuxeo.workshop.products.action.ProductsActionBean-action.png">
-      <category>SUBVIEW_UPPER_LIST</category>
+    <action id="permalinkAction" label="label.permalink" type="fancybox"
+            icon="/icons/org.nuxeo.workshop.products.action.ProductsActionBean-action.png" accessKey="k" order="-500">
+      <category>DOCUMENT_UPPER_ACTION</category>
       <filter-id>org.nuxeo.workshop.products.action.ProductsActionBean</filter-id>
+      <properties>
+        <property name="include">/add_distributor.xhtml</property>
+      </properties>
     </action>
+
   </extension>
 
   <extension target="org.nuxeo.ecm.platform.actions.ActionService"
@@ -22,5 +25,6 @@
     </filter>
 
   </extension>
+
 
 </component>

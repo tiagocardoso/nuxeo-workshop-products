@@ -4,11 +4,15 @@ package org.nuxeo.workshop.products.adapter;
 import org.nuxeo.ecm.collections.core.adapter.Collection;
 import org.nuxeo.ecm.core.api.*;
 import org.nuxeo.ecm.core.api.impl.DocumentModelListImpl;
+import org.nuxeo.ecm.core.api.model.Property;
 import org.nuxeo.runtime.api.Framework;
 import org.nuxeo.workshop.products.ProductService;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TAProduct {
@@ -48,6 +52,28 @@ public class TAProduct {
                 .map(IdRef::new)
                 .collect(Collectors.toList()));
         return collectionMembers;
+    }
+
+    public void addDistributor(String name, String location) {
+        List<Map<String, Serializable>> distributors = new ArrayList<>();
+
+        Property distributorsProperty = doc.getProperty("TAProduct:distributor");
+        for (Property distributorProperty: distributorsProperty) {
+            Map<String, Serializable> distributor = new HashMap<>();
+            distributor.put("name", distributorProperty.getValue("name"));
+            distributor.put("location", distributorProperty.getValue("location"));
+
+            distributors.add(distributor);
+        }
+
+        Map<String, Serializable> distributor = new HashMap<>();
+        distributor.put("name", name);
+        distributor.put("location", location);
+
+        distributors.add(distributor);
+        doc.setPropertyValue("TAProduct:distributor", (Serializable)distributors);
+        doc.getCoreSession().saveDocument(doc);
+
     }
 
 }
