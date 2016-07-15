@@ -1,0 +1,28 @@
+<div xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:h="http://java.sun.com/jsf/html">
+
+    <h3>
+        <h:outputText value="#{messages['label.product.distributor.add']}" />
+    </h3>
+
+    <h:form id="#{fancyboxFormId}">
+
+        <div class="content" style="overflow:auto;">
+            <h:inputText id="name" value="#{productsAction.name}" />
+
+            <h:inputText id="viewdescription" value="#{productsAction.location}" />
+        </div>
+
+        <div class="buttonsGadget">
+            <h:commandButton styleClass="button"
+                             onclick="document.getElementById('#{fancyboxFormId}_waiter').className = '';"
+                             action="#{productsAction.createDistributor}"
+                             value="#{messages['command.update']}"/>
+
+            <span class="displayN" id="#{fancyboxFormId}_waiter">
+        <h:graphicImage value="/img/standart_waiter.gif" />
+      </span>
+        </div>
+    </h:form>
+
+</div>
